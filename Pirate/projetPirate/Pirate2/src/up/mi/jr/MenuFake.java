@@ -7,7 +7,7 @@ public class MenuFake {
 	public static void main (String args[]) {
 		File pirate = new File("/Users/niainaramanantoanina/test.txt");
 		Relation rel = new Relation();
-		rel.parser(pirate);
+		//rel.parser(pirate);
 		System.out.println(rel.afficheListepirate());
 		System.out.println(rel.afficheListeObj());
 		System.out.println(rel.afficheDeteste());
