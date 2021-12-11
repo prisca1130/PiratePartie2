@@ -23,7 +23,7 @@ public class Sauvegarde {
 			throw new NullPointerException("Il n'y a rien à sauvegarder, car l'affectation des objets n'a pas eu lieu");
 		}
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(sauvegarde))){
-			bw.append(affec.affichepirateObjet());
+			bw.append(affec.afficheAffectation());
 		} catch (FileNotFoundException e) {
 			System.err.println("Le fichier de sauvegarde est introuvable");
 			e.printStackTrace();

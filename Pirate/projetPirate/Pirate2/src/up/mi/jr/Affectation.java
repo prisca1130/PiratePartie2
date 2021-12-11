@@ -61,7 +61,7 @@ public class Affectation {
 	     }
 	}
 	
-	public HashMap<Pirate, Objet> affectation(Relation rel){
+	public void affectation(Relation rel){
 		//Pour passer d'un dictionnaire associant à un objet, un pirate 
 		//à un dictionnaire associant à un pirate, un objet
 		tempAffectation(rel);
@@ -71,7 +71,6 @@ public class Affectation {
 		for(Objet i : objetPirate.keySet()) {
 			this.pirateObjet.put(objetPirate.get(i), i);
 		}
-		return pirateObjet;
 	}
 	
 	/**
