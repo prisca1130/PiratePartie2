@@ -37,13 +37,12 @@ public class Objet {
 	
 	@Override
 	public boolean equals(Object o) {
-		if((o == null) || !(o instanceof Objet)) {
+		if(!(o instanceof Objet nvObjet)) {
 			return false;
 		}
 		if (o == this) {
 			return true;
 		}
-		Objet nvObjet = (Objet) o;
 		return (nvObjet.getNom().equals(this.nom));
 	}
 }
