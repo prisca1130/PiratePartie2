@@ -13,15 +13,14 @@ public class MenuFake {
 		System.out.println(rel.afficheDeteste());
 		System.out.println(rel.affichePreference());
 		Affectation affec = new Affectation();
-		affec.tempaffect(rel);
-		affec.affectation();
+		affec.affectation(rel);
 //		System.out.println(affec.getPirateObjet().entrySet());
 		
-		System.out.println(affec.affichepirateObjet());
+		System.out.println(affec.afficheAffectation());
 		Cout cout = new Cout(rel);
 		System.out.println(" Voici le cout de votre affectation : "+cout.calculCout(affec));
 		Affectation affecnew = cout.algoNaif(3);
-		System.out.println(affecnew.affichepirateObjet());
+		System.out.println(affecnew.afficheAffectation());
 
 		System.out.println("ok");
 

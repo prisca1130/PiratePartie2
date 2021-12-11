@@ -15,7 +15,25 @@ public class Menu {
 		System.out.println("Veillez entrez le chemin du fichier descriptif de l'équipage");
 		String chemin = sc.nextLine();
 		File fichier = new File(chemin);
-		rel.parser(fichier);
+		Recuperation recup = new Recuperation(fichier,rel);
+		recup.parserPirate();
+		recup.parserObjet();
+		recup.parserDeteste();
+		recup.parserPreference();
+		try {
+			System.out.println("\n---------------- Liste de l'équipage  -----------------");
+			System.out.println(rel.afficheListepirate());
+			System.out.println("\n---------------- Liste du butin  -----------------");
+			System.out.println(rel.afficheListeObj());
+			System.out.println("\n---------------- Relations d'affinité entre les pirates   -----------------");
+			System.out.println(rel.afficheDeteste());
+			System.out.println("\n---------------- Liste de préférence des pirates  -----------------");
+			System.out.println(rel.affichePreference());
+			System.out.println("\n---------------- Liste de la première affectation  -----------------");
+			System.out.println(affec.afficheAffectation());
+		}catch(NullPointerException e) {
+			System.err.println(e.getMessage());
+		}
 		int choix;
 		do {
 		System.out.println("\n---------------- Menu  -----------------");
@@ -24,14 +42,15 @@ public class Menu {
 		System.out.println("2 Résolution manuelle");
 		System.out.println("3 Sauvegarder");
 		System.out.println("4 Quitter le menu");
-		choix = lireEntierAuClavier(sc, "Choix = ");	
+		choix = lireEntierAuClavier(sc, "\nChoix = ");
 		switch (choix) {
 		case 1:
 			Cout cout = new Cout(rel);
 			System.out.println("Pour la résolution automatique, combien de tentative d'échange voulez vous faire?");
-			int k = lireEntierAuClavier(sc, "Nombre tentative = ");
+			int k = lireEntierAuClavier(sc, "\nNombre tentative = ");
 			affec = cout.algoNaif(k);
-			System.out.println(affec.affichepirateObjet());
+			System.out.println("\n---------------- Résultat de la résolution automatique  -----------------");
+			System.out.println(affec.afficheAffectation());
 			break;
 		case 2:
 			menu2(sc,rel,affec);
@@ -39,7 +58,6 @@ public class Menu {
 			
 		case 3:
 			Sauvegarde sauvegarde = new Sauvegarde();
-			//sauvegarde.creerFichier();
 			sauvegarde.sauvegarder(affec);
 			break;
 			
@@ -60,12 +78,9 @@ public class Menu {
 	 * @param rel Un objet de type Relation pour représenter les differentes relations entre les pirates et les objets
 	 */
 	
-	public static void menu2(Scanner sc,Relation rel, Affectation aff) {
-		
-		System.out.println("Voici une idée d'affectation ");
-		aff.tempaffect(rel);
-		aff.affectation();
-		System.out.println(aff.affichepirateObjet());
+	public static void menu2(Scanner sc,Relation rel, Affectation aff) throws NullPointerException {
+		System.out.println("\n---------------- Résultat de la dernière résolution -----------------");
+		System.out.println(aff.afficheAffectation());
 		int choix;
 		do {
 		System.out.println("\n---------------- Résolution Manuelle -----------------");
@@ -74,29 +89,33 @@ public class Menu {
 		System.out.println("2 Afficher les coûts");
 		System.out.println("3 Quitter");
 		choix = lireEntierAuClavier(sc, "Choix = ");
-		if ((choix < 1) || (choix > 3)) {
-			System.err.println("Le choix " + choix + " n'est pas valide.");
-			System.exit(1);
-		}	
+
 		switch (choix) {
 		case 1:
-			
 			System.out.println("Les objets de quels pirates voulez-vous echanger ?");
 			System.out.println("Entrez le nom du premier pirate");
 			String p1 = sc.next();
 			System.out.println("Entrez le nom du second pirate");
 			String p2 = sc.next();
+			if(!(rel.getListePirate().containsKey(p1) && rel.getListePirate().containsKey(p2))){
+				throw new NullPointerException("Les pirates saisis n'existent pas");
+			}
+			if(p1.equals(p2)) {
+				System.err.println("Vous voulez échanger les objets d'un même pirate");
+			}
 			aff = aff.echange(rel.getListePirate().get(p1), rel.getListePirate().get(p2));
-			System.out.println("Voici les conséquences de vos affectations ");
-			System.out.println(aff.affichepirateObjet());
+			System.out.println("\n---------------- Résultat de votre résolution -----------------");
+			System.out.println(aff.afficheAffectation());
 			break;
 		case 2:
 			Cout cout = new Cout(rel);
 			System.out.println("Voici le coût suite aux affectations : " + cout.calculCout(aff));
 			break;
-		case 3:
-			break;
-			
+		case 3 :
+				break;
+		default :
+				System.out.println("Le choix " + choix + " n'est pas valide.");
+
 		}
 		}while(choix!=3);
 	}

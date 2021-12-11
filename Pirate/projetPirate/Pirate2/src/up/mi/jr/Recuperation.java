@@ -17,6 +17,29 @@ public class Recuperation {
 		this.rel=rel;
 	}
 
+	public void parserPirate() {
+		String nom = null;
+		try(BufferedReader br = new BufferedReader(new FileReader(fichier))){
+			String ligne = null;
+			while ((ligne = br.readLine()) != null) {
+
+				if(ligne.startsWith("pirate") || ligne.startsWith("Pirate")) {
+
+					nom = ligne.substring(ligne.indexOf("(")+1, ligne.indexOf(")"));
+					rel.getListePirate().put(nom,new Pirate(nom));
+				}
+			}
+		}catch (FileNotFoundException e) {
+			e. printStackTrace ();
+		} catch (IOException e) {
+			e. printStackTrace ();
+		}
+		if(nom == null) {
+			System.err.println("Le nom du pirate n'a pas ete indiqué");
+			System.exit(0);
+		}
+	}
+
 	public void parserObjet() {
 		String nomObjet = null;
 

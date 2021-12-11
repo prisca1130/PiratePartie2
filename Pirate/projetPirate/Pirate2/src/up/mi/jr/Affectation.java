@@ -78,7 +78,7 @@ public class Affectation {
 	 * Permet de retourner l'affichage d'un dictionnaire représentant l'attribution d'un objet à chaque pirate
 	 * @return L'affichage d'un dictionnaire représentant l'pirateObjet d'un objet à chaque pirate
 	 */
-	public String affichepirateObjet() {
+	public String afficheAffectation() {
 		StringBuilder buf = new StringBuilder();
 		for(Pirate i : pirateObjet.keySet()) {
 			buf.append(i.getNom()).append(" : ").append(pirateObjet.get(i).toString()).append("\n");
