@@ -13,25 +13,16 @@ public class Sauvegarde {
 		sauvegarde= new File("SauvegardePirate.txt");
 	}
 	
-//    public void creerFichier() {
-//		try {
-//			if (sauvegarde.createNewFile()) {
-//				System.out.println("Fichier crée: " + sauvegarde.getName());
-//			} else {
-//				System.out.println("Fichier existant");
-//			}
-//		} catch (IOException e) {
-//			System.out.println("Erreur lors de la création du fichier");
-//			e.printStackTrace();
-//		}
-//	}
-//	
-	public void sauvegarder(Affectation affec) {
+
+	public void sauvegarder(Affectation affec) throws NullPointerException{
+		/*
+		TODO
+		 à Revoir car cas déja traité par l'erreur de affichepirateObjet
+		*/
+		if (affec==null) {
+			throw new NullPointerException("Il n'y a rien à sauvegarder, car l'affectation des objets n'a pas eu lieu");
+		}
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(sauvegarde))){
-//			StringBuffer buf = new StringBuffer();
-//			for(Pirate i : affec.getPirateObjet().keySet()) {
-//				buf.append(i.getNom()+ " : " + affec.getPirateObjet().get(i).getNom() + "\n");
-//			}
 			bw.append(affec.affichepirateObjet());
 		} catch (FileNotFoundException e) {
 			System.err.println("Le fichier de sauvegarde est introuvable");
@@ -39,8 +30,8 @@ public class Sauvegarde {
 		}catch (IOException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
-		}; 
-		
+		}
+
 	}
 
 }
