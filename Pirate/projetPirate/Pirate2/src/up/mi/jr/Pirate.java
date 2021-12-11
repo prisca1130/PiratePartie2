@@ -32,13 +32,12 @@ public class Pirate {
 		
 	@Override
 	public boolean equals(Object o) {
-		if((o == null) || !(o instanceof Pirate)) {
+		if(!(o instanceof Pirate nvPirate)) {
 			return false;
 		}
 		if (o == this) {
 			return true;
 		}
-		Pirate nvPirate = (Pirate) o;
 		return (nvPirate.getNom().equals(this.nom));
 	}
 	
