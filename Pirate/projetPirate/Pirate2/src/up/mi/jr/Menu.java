@@ -20,6 +20,7 @@ public class Menu {
 		recup.parserObjet();
 		recup.parserDeteste();
 		recup.parserPreference();
+		affec.affectation(rel);
 		try {
 			System.out.println("\n---------------- Liste de l'équipage  -----------------");
 			System.out.println(rel.afficheListepirate());
