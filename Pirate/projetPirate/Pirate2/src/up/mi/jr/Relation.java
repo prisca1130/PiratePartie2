@@ -92,9 +92,9 @@ public class Relation {
 	 * Permet de retourner l'affichage d'un dictionnaire représentant les préférences de chaque pirate
 	 * @return La liste des objets rangés dans l'ordre de préférence de chaque pirate
 	 */
-	public String affichePreference() throws NullPointerException {
+	public String affichePreference() throws EmptyObject {
 		if (preference.isEmpty()) {
-			throw new NullPointerException("La liste de préference de tous les pirates n'a pas été fait");
+			throw new EmptyObject("La liste de préference de tous les pirates n'a pas été fait");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(Pirate i : preference.keySet()) {

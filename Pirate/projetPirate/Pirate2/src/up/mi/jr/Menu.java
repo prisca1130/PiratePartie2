@@ -57,6 +57,9 @@ public class Menu {
 			break;
 			
 		case 3:
+			if(affec.getPirateObjet().isEmpty()) {
+				throw new EmptyObject("il n'y a pas encore d'affectation à sauvegarder");
+			}
 			sauvegarder(affec);
 			break;
 			

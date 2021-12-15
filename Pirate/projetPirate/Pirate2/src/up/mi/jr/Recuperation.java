@@ -42,7 +42,7 @@ public class Recuperation {
 		}
 	}
 
-	public void parserObjet() {
+	public void parserObjet() throws EmptyObject {
 		String nomObjet = null;
 
 		try(BufferedReader br = new BufferedReader(new FileReader(fichier))){
@@ -67,8 +67,7 @@ public class Recuperation {
 			System.exit(0);
 		}
 		if (rel.getListeObj().size() != rel.getListePirate().size()) {
-			System.err.println("Attention le nombre d'objet saisi est different du nombre de pirate saisi");
-			System.err.println("Veuillez revoir votre fichier");
+			throw new EmptyObject("Veuillez revoir le fichier, car le nombre d'objet saisi est different du nombre de pirate saisi");
 		}
 
 	}
@@ -83,14 +82,13 @@ public class Recuperation {
 
 				if(ligne.startsWith("deteste") || ligne.startsWith("Deteste")) {
 					nomsPirate = (ligne.substring(ligne.indexOf("(")+1, ligne.indexOf(")")));
-//						//Traiter le cas où il rentre pls desteste ex 3
 					ArrayList<Pirate> deteste1 = new ArrayList<>();
 					ArrayList<Pirate> deteste2 = new ArrayList<>();
 					if(!(rel.getListePirate().containsKey(nomsPirate.split(",")[0]) && rel.getListePirate().containsKey(nomsPirate.split(",")[1]))){
 						throw new EmptyObject("Veuillez revoir le fichier au niveau de \"deteste\", car le nom du pirate n'existe pas");
 					}
 					if(nomsPirate.split(",")[0].equals(nomsPirate.split(",")[1])) {
-						System.err.println("Veuillez revoir le fichier au niveau de \"deteste\" \nUn pirate ne peut se détester lui-même");
+						throw new EmptyObject("Veuillez revoir le fichier au niveau de \"deteste\" \n, car un pirate ne peut se détester lui-même");
 					}
 					Pirate p1 = rel.getListePirate().get(nomsPirate.split(",")[0]);
 					Pirate p2 = rel.getListePirate().get(nomsPirate.split(",")[1]);
@@ -124,7 +122,7 @@ public class Recuperation {
 	}
 
 
-	public void parserPreference() {
+	public void parserPreference()throws EmptyObject {
 		String nomsPirObj = null;
 
 		try(BufferedReader br = new BufferedReader(new FileReader(fichier))){
@@ -139,18 +137,17 @@ public class Recuperation {
 					ArrayList<Objet> listObj = new ArrayList<>();
 					String [] EnsPirObj = nomsPirObj.split(",");
 					if (EnsPirObj.length != rel.getListePirate().size()+1 ) {
-						System.err.println("Attention, tous les objets doivent être ordonner dans la liste de préférence de chaque pirate");
-						System.err.println("Veuillez revoir votre fichier, au niveau de preference");
+						throw new EmptyObject("Veuillez revoir le fichier au niveau de \"preference\" \n car tous les objets doivent être ordonner dans la liste de préférence de chaque pirate");
 					}
 
 					for(int i = 1; i<EnsPirObj.length; i++) {
 						if(listObj.contains(rel.getListeObj().get(nomsPirObj.split(",")[i]))){
-							System.err.println("Veuillez revoir votre fichier, au niveau de preference, car vous avez saisi deux fois le même objet");
+							throw new EmptyObject("Veuillez revoir le fichier au niveau de \"preference\" \n car vous avez saisi deux fois le même objet");
 						}else {
 							listObj.add(rel.getListeObj().get(nomsPirObj.split(",")[i]));
 						}
 						rel.getPreference().put(rel.getListePirate().get(EnsPirObj[0]), listObj);
-						//System.out.println(rel.affichePreference());
+
 					}
 
 				}
@@ -167,8 +164,7 @@ public class Recuperation {
 			System.exit(0);
 		}
 		if (rel.getPreference().size() != rel.getListePirate().size()) {
-			System.err.println("Attention, il faut saisir autant de relation de préférence que de nombre de pirate");
-			System.err.println("Veuillez revoir votre fichier, au niveau de preference");
+			throw new EmptyObject("Veuillez revoir le fichier au niveau de \"preference\" \n car il faut saisir autant de relation de préférence que de nombre de pirate");
 		}
 
 	}
