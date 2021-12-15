@@ -108,9 +108,9 @@ public class Relation {
 	 * Permet de retourner l'affichage d'un dictionnaire qui associe à un pirate, les pirates qu'il n'aime pas
 	 * @return La liste des noms des pirates que chaque pirate n'aime pas
 	 */
-	public String afficheDeteste() throws NullPointerException{
+	public String afficheDeteste() throws EmptyObject{
 		if (deteste.isEmpty()) {
-			throw new NullPointerException("Les relations d'affinité de tous les pirates n'ont pas été fait");
+			throw new EmptyObject("Les relations d'affinité de tous les pirates n'ont pas été fait");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(Pirate i : deteste.keySet()) {
@@ -121,9 +121,9 @@ public class Relation {
 	
 	
 	
-	public String afficheListepirate() throws NullPointerException {
+	public String afficheListepirate() throws EmptyObject {
 		if (listePirate.isEmpty()) {
-			throw new NullPointerException("La liste des pirates est vide");
+			throw new EmptyObject("La liste des pirates est vide");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(String i : listePirate.keySet()) {
@@ -133,9 +133,9 @@ public class Relation {
 	}
 	
 	
-	public String afficheListeObj() throws NullPointerException {
+	public String afficheListeObj() throws EmptyObject {
 		if (listeObj.isEmpty()) {
-			throw new NullPointerException("La liste des objets est vide");
+			throw new EmptyObject("La liste des objets est vide");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(String i : listeObj.keySet()) {

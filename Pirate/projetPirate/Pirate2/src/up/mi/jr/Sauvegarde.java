@@ -15,13 +15,7 @@ public class Sauvegarde {
 	
 
 	public void sauvegarder(Affectation affec) throws NullPointerException{
-		/*
-		TODO
-		 à Revoir car cas déja traité par l'erreur de affichepirateObjet
-		*/
-		if (affec==null) {
-			throw new NullPointerException("Il n'y a rien à sauvegarder, car l'affectation des objets n'a pas eu lieu");
-		}
+
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(sauvegarde))){
 			bw.append(affec.afficheAffectation());
 		} catch (FileNotFoundException e) {

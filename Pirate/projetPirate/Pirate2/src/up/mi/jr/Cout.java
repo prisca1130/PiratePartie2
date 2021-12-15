@@ -56,7 +56,7 @@ public class Cout {
 		return jaloux.size();
 	}
 
-	public int calculCout1111( Affectation affec) throws NullPointerException {
+	public int calculCout1111( Affectation affec)  {
 		ArrayList<Pirate> jaloux = new ArrayList<>() ;
 		for(Pirate p : affec.getPirateObjet().keySet()) {
 			boolean isjaloux = false; //pour savoir si le pirate est jaloux de quelqu'un
@@ -94,7 +94,6 @@ public class Cout {
 			Pirate pVoisin = equipe.get(index1);
 			Affectation S1 = S.echange(p, pVoisin);
 			if (calculCout(S) > calculCout(S1)) {
-				System.out.println("hello");
 				S = S1;
 			}
 			i++;

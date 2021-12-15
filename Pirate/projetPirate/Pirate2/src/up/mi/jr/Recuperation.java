@@ -31,8 +31,10 @@ public class Recuperation {
 			}
 		}catch (FileNotFoundException e) {
 			e. printStackTrace ();
+			System.err.println(e.getMessage());
 		} catch (IOException e) {
 			e. printStackTrace ();
+			System.err.println(e.getMessage());
 		}
 		if(nom == null) {
 			System.err.println("Le nom du pirate n'a pas ete indiqué");
@@ -55,8 +57,10 @@ public class Recuperation {
 			}
 		}catch (FileNotFoundException e) {
 			e. printStackTrace ();
+			System.err.println(e.getMessage());
 		} catch (IOException e) {
 			e. printStackTrace ();
+			System.err.println(e.getMessage());
 		}
 		if(nomObjet == null) {
 			System.err.println("Le nom de l'objet n'a pas ete indiqué");
@@ -70,7 +74,7 @@ public class Recuperation {
 	}
 
 
-	public void parserDeteste() throws NullPointerException{
+	public void parserDeteste() throws EmptyObject{
 		String nomsPirate = null;
 
 		try(BufferedReader br = new BufferedReader(new FileReader(fichier))){
@@ -83,7 +87,7 @@ public class Recuperation {
 					ArrayList<Pirate> deteste1 = new ArrayList<>();
 					ArrayList<Pirate> deteste2 = new ArrayList<>();
 					if(!(rel.getListePirate().containsKey(nomsPirate.split(",")[0]) && rel.getListePirate().containsKey(nomsPirate.split(",")[1]))){
-						throw new NullPointerException("Veuillez revoir le fichier au niveau de \"deteste\", car le nom du pirate n'existe pas");
+						throw new EmptyObject("Veuillez revoir le fichier au niveau de \"deteste\", car le nom du pirate n'existe pas");
 					}
 					if(nomsPirate.split(",")[0].equals(nomsPirate.split(",")[1])) {
 						System.err.println("Veuillez revoir le fichier au niveau de \"deteste\" \nUn pirate ne peut se détester lui-même");
@@ -107,8 +111,10 @@ public class Recuperation {
 			}
 		}catch (FileNotFoundException e) {
 			e. printStackTrace ();
+			System.err.println(e.getMessage());
 		} catch (IOException e) {
 			e. printStackTrace ();
+			System.err.println(e.getMessage());
 		}
 		if(nomsPirate == null) {
 			System.err.println("La relation d'affinité entre les pirates n'a pas ete indiqué");
@@ -151,8 +157,10 @@ public class Recuperation {
 			}
 		}catch (FileNotFoundException e) {
 			e. printStackTrace ();
+			System.err.println(e.getMessage());
 		} catch (IOException e) {
 			e. printStackTrace ();
+			System.err.println(e.getMessage());
 		}
 		if(nomsPirObj == null) {
 			System.err.println("La liste de preferences d'un pirate n'a pas ete indiqué");

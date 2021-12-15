@@ -1,13 +1,13 @@
 package up.mi.jr;
 
-import java.io.File;
+import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
-	
 
 	public static void main(String [] args) {
+		try {
 		System.out.println("Bonjour!!");
 		Scanner sc = new Scanner(System.in);
 		Relation rel = new Relation();
@@ -22,7 +22,6 @@ public class Menu {
 		recup.parserDeteste();
 		recup.parserPreference();
 		affec.affectation(rel);
-		try {
 			System.out.println("\n---------------- Liste de l'équipage  -----------------");
 			System.out.println(rel.afficheListepirate());
 			System.out.println("\n---------------- Liste du butin  -----------------");
@@ -34,9 +33,7 @@ public class Menu {
 			System.out.println("\n---------------- Liste de la première affectation  -----------------");
 			System.out.println(affec.afficheAffectation());
 			System.out.println("\nle cout est : "+cout.calculCout1111(affec));
-		}catch(NullPointerException e) {
-			System.err.println(e.getMessage());
-		}
+
 		int choix;
 		do {
 		System.out.println("\n---------------- Menu  -----------------");
@@ -60,8 +57,7 @@ public class Menu {
 			break;
 			
 		case 3:
-			Sauvegarde sauvegarde = new Sauvegarde();
-			sauvegarde.sauvegarder(affec);
+			sauvegarder(affec);
 			break;
 			
 		case 4 :
@@ -73,6 +69,9 @@ public class Menu {
 		}
 		}while(choix!=4);
 		sc.close();
+		}catch(EmptyObject e) {
+			System.err.println(e.getMessage());
+		}
    }
 	
 	/**
@@ -81,7 +80,7 @@ public class Menu {
 	 * @param rel Un objet de type Relation pour représenter les differentes relations entre les pirates et les objets
 	 */
 	
-	public static void menu2(Scanner sc,Relation rel, Affectation aff) throws NullPointerException {
+	public static void menu2(Scanner sc,Relation rel, Affectation aff) throws EmptyObject{
 		System.out.println("\n---------------- Résultat de la dernière résolution -----------------");
 		System.out.println(aff.afficheAffectation());
 		int choix;
@@ -101,7 +100,7 @@ public class Menu {
 			System.out.println("Entrez le nom du second pirate");
 			String p2 = sc.next();
 			if(!(rel.getListePirate().containsKey(p1) && rel.getListePirate().containsKey(p2))){
-				throw new NullPointerException("Les pirates saisis n'existent pas");
+				throw new EmptyObject("Les pirates saisis n'existent pas");
 			}
 			if(p1.equals(p2)) {
 				System.err.println("Vous voulez échanger les objets d'un même pirate");
@@ -144,6 +143,20 @@ public class Menu {
 			}
 		}
 		return nb;
+	}
+
+	private static void sauvegarder(Affectation affec) throws NullPointerException{
+
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter("SauvegardePirate.txt"))){
+			bw.append(affec.afficheAffectation());
+		} catch (FileNotFoundException e) {
+			System.err.println("Le fichier de sauvegarde est introuvable");
+			e.printStackTrace();
+		}catch (IOException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+		}
+
 	}
 
 	

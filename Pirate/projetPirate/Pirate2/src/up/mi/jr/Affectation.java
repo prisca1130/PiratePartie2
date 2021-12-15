@@ -65,9 +65,6 @@ public class Affectation {
 		//Pour passer d'un dictionnaire associant à un objet, un pirate 
 		//à un dictionnaire associant à un pirate, un objet
 		tempAffectation(rel);
-		if (objetPirate.isEmpty()) {
-			throw new NullPointerException("Il y'a eu un problème au niveau de l'affectation des objets");
-		}
 		for(Objet i : objetPirate.keySet()) {
 			this.pirateObjet.put(objetPirate.get(i), i);
 		}
@@ -114,14 +111,22 @@ public class Affectation {
 	 * @param p1 le premier pirate
 	 * @param p2 le second pirate
 	 */
-	public Affectation echange(Pirate p1, Pirate p2) throws NullPointerException{
+	public Affectation echange(Pirate p1, Pirate p2) {
 		HashMap < Objet,Pirate> objpi = copObjpi();
 		HashMap<Pirate, Objet>  piobj = copPiobj();
-		// TODO vraiment nécessaire??
-		if (objpi.isEmpty() && piobj.isEmpty()) {
-			throw new NullPointerException("Il y'a eu un problème au niveau de l'échange");
-		}
         Affectation affecnew = new Affectation(piobj,objpi);
+		Objet temp = affecnew.getPirateObjet().get(p1);
+		affecnew.getPirateObjet().replace(p1, affecnew.getPirateObjet().get(p2));
+		affecnew.getPirateObjet().replace(p2, temp);
+		affecnew.getObjetPirate().replace(affecnew.getPirateObjet().get(p1),p1);
+		affecnew.getObjetPirate().replace(affecnew.getPirateObjet().get(p2),p2);
+		return affecnew;
+	}
+
+	public Affectation echange2222(Pirate p1, Pirate p2) {
+		HashMap < Objet,Pirate> objpi1 = new HashMap<>(objetPirate);
+		HashMap<Pirate, Objet>  piobj1 = new HashMap<>(pirateObjet);
+		Affectation affecnew = new Affectation(piobj1,objpi1);
 		Objet temp = affecnew.getPirateObjet().get(p1);
 		affecnew.getPirateObjet().replace(p1, affecnew.getPirateObjet().get(p2));
 		affecnew.getPirateObjet().replace(p2, temp);
