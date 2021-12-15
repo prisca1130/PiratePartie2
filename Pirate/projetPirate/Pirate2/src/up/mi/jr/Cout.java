@@ -3,6 +3,8 @@ package up.mi.jr;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+
 public class Cout {
 	
 	Relation rel;
@@ -52,12 +54,33 @@ public class Cout {
 				}
 			}	
 		return jaloux.size();
-	}	
+	}
 
-	
+	public int calculCout1111( Affectation affec) throws NullPointerException {
+		ArrayList<Pirate> jaloux = new ArrayList<>() ;
+		for(Pirate p : affec.getPirateObjet().keySet()) {
+			boolean isjaloux = false; //pour savoir si le pirate est jaloux de quelqu'un
+			int i=0;
+			//On parcourt la liste de préférences d'un pirate, jusqu'à trouver l'objet qui lui est affecté ou lorsqu'on sait qu'il est jaloux
+			while(!rel.getPreference().get(p).get(i).equals(affec.getPirateObjet().get(p)) && !isjaloux) {
+				//Objet préféré par rapport à l'objet que le pirate p a eu
+				Objet o = rel.getPreference().get(p).get(i);
+				// On regarde si le pirate qui a eu l'objet fait parti des pirates que le pirate p n'aime pas
+				if( rel.getdeteste().get(p).contains(affec.getObjetPirate().get(o))){
+					//Un pirate peut être jaloux qu'une seule fois
+					isjaloux=true;
+					jaloux.add(p);
+				}
+				i++;
+			}
+		}
+		return jaloux.size();
+	}
+
+
+
 	public Affectation algoNaif(int k) {
 		int i = 0;
-//		ArrayList <Pirate> equipe = equipage;
 		Random randomGenerateur = new Random();
 		Affectation S = new Affectation();
 		S.affectation(rel);

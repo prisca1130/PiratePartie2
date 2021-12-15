@@ -98,7 +98,7 @@ public class Relation {
 		}
 		StringBuilder buf = new StringBuilder();
 		for(Pirate i : preference.keySet()) {
-			buf.append("\n Voici sa liste de preférence du pirate ").append(i.getNom()).append(" : ").append(preference.get(i));
+			buf.append("\n Voici la liste de preférence du pirate ").append(i.getNom()).append(" : ").append(preference.get(i));
 		}
 		return buf.toString();
 	}

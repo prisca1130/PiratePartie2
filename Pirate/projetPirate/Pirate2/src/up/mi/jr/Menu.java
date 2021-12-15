@@ -12,6 +12,7 @@ public class Menu {
 		Scanner sc = new Scanner(System.in);
 		Relation rel = new Relation();
 		Affectation affec = new Affectation();
+		Cout cout = new Cout(rel);
 		System.out.println("Veillez entrez le chemin du fichier descriptif de l'équipage");
 		String chemin = sc.nextLine();
 		File fichier = new File(chemin);
@@ -32,6 +33,7 @@ public class Menu {
 			System.out.println(rel.affichePreference());
 			System.out.println("\n---------------- Liste de la première affectation  -----------------");
 			System.out.println(affec.afficheAffectation());
+			System.out.println("\nle cout est : "+cout.calculCout1111(affec));
 		}catch(NullPointerException e) {
 			System.err.println(e.getMessage());
 		}
@@ -46,12 +48,12 @@ public class Menu {
 		choix = lireEntierAuClavier(sc, "\nChoix = ");
 		switch (choix) {
 		case 1:
-			Cout cout = new Cout(rel);
 			System.out.println("Pour la résolution automatique, combien de tentative d'échange voulez vous faire?");
 			int k = lireEntierAuClavier(sc, "\nNombre tentative = ");
 			affec = cout.algoNaif(k);
 			System.out.println("\n---------------- Résultat de la résolution automatique  -----------------");
 			System.out.println(affec.afficheAffectation());
+			System.out.println("\nle cout est : "+cout.calculCout1111(affec));
 			break;
 		case 2:
 			menu2(sc,rel,affec);
