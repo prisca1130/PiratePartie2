@@ -8,7 +8,7 @@ public class EmptyObject extends Exception{
      * Crée l'exception
      */
     public EmptyObject() {
-        super("Données dans fichier dataInput sont incorrectes");
+        super("L'objet manipulé est vide");
     }
 
     /**
