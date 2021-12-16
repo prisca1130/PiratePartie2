@@ -14,7 +14,6 @@ public class Menu {
 		Affectation affec = new Affectation();
 		Cout cout = new Cout(rel);
 		File fichier = new File(args[0]);
-		String chemin;
 		Recuperation recup = new Recuperation(fichier,rel);
 		recup.parserPirate();
 		recup.parserObjet();
@@ -31,7 +30,7 @@ public class Menu {
 			System.out.println(rel.affichePreference());
 			System.out.println("\n---------------- Liste de la première affectation  -----------------");
 			System.out.println(affec.afficheAffectation());
-			System.out.println("\nle cout est : "+cout.calculCout1111(affec));
+			System.out.println("\nle cout est : "+cout.calculCout(affec));
 
 		int choix;
 		do {
@@ -49,16 +48,13 @@ public class Menu {
 			affec = cout.algoNaif(k);
 			System.out.println("\n---------------- Résultat de la résolution automatique  -----------------");
 			System.out.println(affec.afficheAffectation());
-			System.out.println("\nle cout est : "+cout.calculCout1111(affec));
+			System.out.println("\nle cout est : "+cout.calculCout(affec));
 			break;
 		case 2:
 			menu2(sc,rel,affec);
 			break;
 			
 		case 3:
-			if(affec.getPirateObjet().isEmpty()) {
-				throw new EmptyObject("il n'y a pas encore d'affectation à sauvegarder");
-			}
 			sauvegarder(affec,sc);
 			break;
 			

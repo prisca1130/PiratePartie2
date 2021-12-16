@@ -82,11 +82,7 @@ public class Relation {
 	public HashMap<String, Objet> getListeObj(){
 		return listeObj;
 	}
-	
-	
-	
 
-	
 	
 	/**
 	 * Permet de retourner l'affichage d'un dictionnaire représentant les préférences de chaque pirate

@@ -82,48 +82,8 @@ public class Affectation {
 		return buf.toString();
 	}
 
-	
-	private HashMap<Pirate, Objet> copPiobj(){
-		HashMap <Pirate, Objet> piobj = new HashMap<>();
-		for (Map.Entry<Pirate, Objet> entry : pirateObjet.entrySet()){
-			Pirate key = entry.getKey();
-			Objet value = entry.getValue();
-			piobj.put(key, value);
-		}
-		return piobj;
-	}
-	
-	
-	
-	private HashMap< Objet,Pirate> copObjpi(){
-		HashMap < Objet,Pirate> objpi = new HashMap<>();
-		for (Map.Entry< Objet,Pirate> entry : objetPirate.entrySet()){
-			Objet key = entry.getKey();
-			Pirate value = entry.getValue();
-			objpi.put(key, value);
-		}
-		return objpi;
-	}
-	
 
-	/**
-	 * Permet d'échanger l'affectation d'objet de deux pirates 
-	 * @param p1 le premier pirate
-	 * @param p2 le second pirate
-	 */
 	public Affectation echange(Pirate p1, Pirate p2) {
-		HashMap < Objet,Pirate> objpi = copObjpi();
-		HashMap<Pirate, Objet>  piobj = copPiobj();
-        Affectation affecnew = new Affectation(piobj,objpi);
-		Objet temp = affecnew.getPirateObjet().get(p1);
-		affecnew.getPirateObjet().replace(p1, affecnew.getPirateObjet().get(p2));
-		affecnew.getPirateObjet().replace(p2, temp);
-		affecnew.getObjetPirate().replace(affecnew.getPirateObjet().get(p1),p1);
-		affecnew.getObjetPirate().replace(affecnew.getPirateObjet().get(p2),p2);
-		return affecnew;
-	}
-
-	public Affectation echange2222(Pirate p1, Pirate p2) {
 		HashMap < Objet,Pirate> objpi1 = new HashMap<>(objetPirate);
 		HashMap<Pirate, Objet>  piobj1 = new HashMap<>(pirateObjet);
 		Affectation affecnew = new Affectation(piobj1,objpi1);
