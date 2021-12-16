@@ -1,13 +1,13 @@
 package up.mi.jr;
 
-public class EmptyObject extends Exception{
+public class EmptyObjectException extends Exception{
 
 
 
     /**
      * Crée l'exception
      */
-    public EmptyObject() {
+    public EmptyObjectException() {
         super("L'objet manipulé est vide");
     }
 
@@ -15,7 +15,7 @@ public class EmptyObject extends Exception{
      * Crée l'exception avec un message d'erreur
      * @param s	message d'erreur
      */
-    public EmptyObject(String s) {
+    public EmptyObjectException(String s) {
         super(s);
     }
 }

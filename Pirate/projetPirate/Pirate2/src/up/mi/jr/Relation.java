@@ -88,9 +88,9 @@ public class Relation {
 	 * Permet de retourner l'affichage d'un dictionnaire représentant les préférences de chaque pirate
 	 * @return La liste des objets rangés dans l'ordre de préférence de chaque pirate
 	 */
-	public String affichePreference() throws EmptyObject {
+	public String affichePreference() throws EmptyObjectException {
 		if (preference.isEmpty()) {
-			throw new EmptyObject("La liste de préference de tous les pirates n'a pas été fait");
+			throw new EmptyObjectException("La liste de préference de tous les pirates n'a pas été fait");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(Pirate i : preference.keySet()) {
@@ -104,9 +104,9 @@ public class Relation {
 	 * Permet de retourner l'affichage d'un dictionnaire qui associe à un pirate, les pirates qu'il n'aime pas
 	 * @return La liste des noms des pirates que chaque pirate n'aime pas
 	 */
-	public String afficheDeteste() throws EmptyObject{
+	public String afficheDeteste() throws EmptyObjectException {
 		if (deteste.isEmpty()) {
-			throw new EmptyObject("Les relations d'affinité de tous les pirates n'ont pas été fait");
+			throw new EmptyObjectException("Les relations d'affinité de tous les pirates n'ont pas été fait");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(Pirate i : deteste.keySet()) {
@@ -117,9 +117,9 @@ public class Relation {
 	
 	
 	
-	public String afficheListepirate() throws EmptyObject {
+	public String afficheListepirate() throws EmptyObjectException {
 		if (listePirate.isEmpty()) {
-			throw new EmptyObject("La liste des pirates est vide");
+			throw new EmptyObjectException("La liste des pirates est vide");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(String i : listePirate.keySet()) {
@@ -129,9 +129,9 @@ public class Relation {
 	}
 	
 	
-	public String afficheListeObj() throws EmptyObject {
+	public String afficheListeObj() throws EmptyObjectException {
 		if (listeObj.isEmpty()) {
-			throw new EmptyObject("La liste des objets est vide");
+			throw new EmptyObjectException("La liste des objets est vide");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(String i : listeObj.keySet()) {
