@@ -12,7 +12,7 @@ public class Cout {
 	
 	public Cout(Relation relation) {
 		rel=relation;
-		k= 100*rel.getListePirate().size();
+		k= 100*rel.getListePirate().size(); // pour éventuellement changer le nombre de tentative pour l'algorithme naif
 	}
 	
 	/**

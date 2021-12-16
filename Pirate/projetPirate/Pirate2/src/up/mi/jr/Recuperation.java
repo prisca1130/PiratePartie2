@@ -11,10 +11,12 @@ import java.util.ArrayList;
 public class Recuperation {
 	private File fichier;
 	private Relation rel;
+	private int nbligne;
 	
 	public Recuperation(File fichier, Relation rel) {
 		this.fichier = fichier;
 		this.rel=rel;
+		this.nbligne=0;
 	}
 
 	public void parserPirate()throws EmptyObjectException {
@@ -22,7 +24,7 @@ public class Recuperation {
 		try(BufferedReader br = new BufferedReader(new FileReader(fichier))){
 			String ligne = null;
 			while ((ligne = br.readLine()) != null) {
-
+				nbligne++;
 				if(ligne.startsWith("pirate") || ligne.startsWith("Pirate")) {
 
 					nom = ligne.substring(ligne.indexOf("(")+1, ligne.indexOf(")"));
@@ -50,7 +52,7 @@ public class Recuperation {
 		try(BufferedReader br = new BufferedReader(new FileReader(fichier))){
 			String ligne = null;
 			while ((ligne = br.readLine()) != null) {
-
+				nbligne++;
 				if(ligne.startsWith("objet") || ligne.startsWith("Objet")) {
 
 					nomObjet = ligne.substring(ligne.indexOf("(")+1, ligne.indexOf(")"));
@@ -83,7 +85,7 @@ public class Recuperation {
 		try(BufferedReader br = new BufferedReader(new FileReader(fichier))){
 			String ligne = null;
 			while ((ligne = br.readLine()) != null) {
-
+				nbligne++;
 				if(ligne.startsWith("deteste") || ligne.startsWith("Deteste")) {
 					nomsPirate = (ligne.substring(ligne.indexOf("(")+1, ligne.indexOf(")")));
 					ArrayList<Pirate> deteste1 = new ArrayList<>();
@@ -131,7 +133,7 @@ public class Recuperation {
 		try(BufferedReader br = new BufferedReader(new FileReader(fichier))){
 			String ligne = null;
 			while ((ligne = br.readLine()) != null) {
-
+				nbligne++;
 				if(ligne.startsWith("preferences") || ligne.startsWith("Preferences")) {
 
 					nomsPirObj = (ligne.substring(ligne.indexOf("(")+1, ligne.indexOf(")")));
@@ -168,6 +170,7 @@ public class Recuperation {
 		if (rel.getPreference().size() != rel.getListePirate().size()) {
 			throw new EmptyObjectException("Veuillez revoir le fichier au niveau de \"preference\" \n car il faut saisir autant de relation de préférence que de nombre de pirate");
 		}
+		System.out.println("nbligne = "+ nbligne);
 
 	}
 	

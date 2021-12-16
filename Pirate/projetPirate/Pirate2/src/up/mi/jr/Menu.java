@@ -14,12 +14,16 @@ public class Menu {
 			Affectation affec = new Affectation();
 			Cout cout = new Cout(rel);
 			File fichier = new File(args[0]);
-			Recuperation recup = new Recuperation(fichier,rel);
+			//Recuperation recup = new Recuperation(fichier,rel);
+			Parse parse = new Parse(fichier,rel);
+			parse.parserPirate();
+			/*
 			recup.parserPirate();
 			recup.parserObjet();
 			recup.parserDeteste();
 			recup.parserPreference();
-			affec.affectation(rel);
+			affec.affectation(rel);*/
+
 			System.out.println("\n---------------- Liste de l'équipage  -----------------");
 			System.out.println(rel.afficheListepirate());
 			System.out.println("\n---------------- Liste du butin  -----------------");
@@ -45,8 +49,6 @@ public class Menu {
 			case 1:
 				Cout cout1 = new Cout(rel);
 				System.out.println(affec.afficheAffectation());
-				System.out.println("Pour la résolution automatique, combien de tentative d'échange voulez vous faire?");
-				int k = lireEntierAuClavier(sc, "\nNombre tentative = ");
 				affec = cout1.algoNaif(affec);
 				System.out.println("\n---------------- Résultat de la résolution automatique  -----------------");
 				System.out.println(affec.afficheAffectation());
@@ -92,6 +94,7 @@ public class Menu {
 
 		switch (choix) {
 		case 1:
+
 			System.out.println("Les objets de quels pirates voulez-vous echanger ?");
 			System.out.println("Entrez le nom du premier pirate");
 			String p1 = sc.next();
