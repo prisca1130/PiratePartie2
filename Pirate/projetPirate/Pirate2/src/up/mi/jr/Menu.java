@@ -13,9 +13,8 @@ public class Menu {
 		Relation rel = new Relation();
 		Affectation affec = new Affectation();
 		Cout cout = new Cout(rel);
-		System.out.println("Veillez entrez le chemin du fichier descriptif de l'équipage");
-		String chemin = sc.nextLine();
-		File fichier = new File(chemin);
+		File fichier = new File(args[0]);
+		String chemin;
 		Recuperation recup = new Recuperation(fichier,rel);
 		recup.parserPirate();
 		recup.parserObjet();
@@ -60,7 +59,7 @@ public class Menu {
 			if(affec.getPirateObjet().isEmpty()) {
 				throw new EmptyObject("il n'y a pas encore d'affectation à sauvegarder");
 			}
-			sauvegarder(affec);
+			sauvegarder(affec,sc);
 			break;
 			
 		case 4 :
@@ -148,16 +147,15 @@ public class Menu {
 		return nb;
 	}
 
-	private static void sauvegarder(Affectation affec) throws NullPointerException{
-
-		try(BufferedWriter bw = new BufferedWriter(new FileWriter("SauvegardePirate.txt"))){
+	private static void sauvegarder(Affectation affec, Scanner sc) throws NullPointerException{
+		System.out.println("Veuillez entrer le chemin du fichier dans lequel vous voulez enregistrer la dernière solution");
+		String chemin = sc.next();
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(chemin))){
 			bw.append(affec.afficheAffectation());
 		} catch (FileNotFoundException e) {
 			System.err.println("Le fichier de sauvegarde est introuvable");
-			e.printStackTrace();
 		}catch (IOException e) {
 			System.err.println(e.getMessage());
-			e.printStackTrace();
 		}
 
 	}

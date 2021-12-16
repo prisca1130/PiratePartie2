@@ -66,7 +66,6 @@ public class Cout {
 				//Objet préféré par rapport à l'objet que le pirate p a eu
 				Objet o = rel.getPreference().get(p).get(i);
 				// On regarde si le pirate qui a eu l'objet fait parti des pirates que le pirate p n'aime pas
-				System.out.println(rel.getdeteste().get(p).contains(affec.getObjetPirate().get(o)));
 				if( rel.getdeteste().get(p).contains(affec.getObjetPirate().get(o))){
 					//Un pirate peut être jaloux qu'une seule fois
 					isjaloux=true;
