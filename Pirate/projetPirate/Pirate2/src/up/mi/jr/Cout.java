@@ -7,17 +7,19 @@ import java.util.Random;
 
 public class Cout {
 	
-	Relation rel;
+	private Relation rel;
+	private int k;
 	
 	public Cout(Relation relation) {
 		rel=relation;
+		k= 100*rel.getListePirate().size();
 	}
 	
 	/**
 	 * Permet de calculer le coût des affectations d'objet des pirates
 	 * @return Le coût des affectations d'objet des pirates
 	 */
-	public int calculCout( Affectation affec)  {
+	public int calculCout(Affectation affec)  {
 		ArrayList<Pirate> jaloux = new ArrayList<>() ;
 		for(Pirate p : affec.getPirateObjet().keySet()) {
 			boolean isjaloux = false; //pour savoir si le pirate est jaloux de quelqu'un
@@ -40,11 +42,11 @@ public class Cout {
 
 
 
-	public Affectation algoNaif(int k) {
+	public Affectation algoNaif(Affectation aff) {
 		int i = 0;
 		Random randomGenerateur = new Random();
-		Affectation S = new Affectation();
-		S.affectation(rel);
+		Affectation S = aff;
+		//S.affectation(rel);
 		while (i < k) {
 			ArrayList <Pirate> equipage = new ArrayList<>(rel.getListePirate().values());
 			ArrayList <Pirate> equipe = new ArrayList<>(rel.getListePirate().values());

@@ -36,6 +36,10 @@ public class Affectation {
 	public HashMap<Pirate,Objet> getPirateObjet(){
 		return pirateObjet;
 	}
+
+	public void setPirateObjet(HashMap<Pirate,Objet> pirateObjetNew){
+		this.pirateObjet= pirateObjetNew;
+	}
 	
 	/**
 	 * Permet de retourner le dictionnaire des affectaions du butin
@@ -44,6 +48,8 @@ public class Affectation {
 	public HashMap<Objet,Pirate> getObjetPirate(){
 		return objetPirate;
 	}
+
+
 	
 	/**
 	 * Permet d'attribuer un objet à chaque pirate
@@ -93,6 +99,14 @@ public class Affectation {
 		affecnew.getObjetPirate().replace(affecnew.getPirateObjet().get(p1),p1);
 		affecnew.getObjetPirate().replace(affecnew.getPirateObjet().get(p2),p2);
 		return affecnew;
+	}
+
+	public void echangeNew(Pirate p1, Pirate p2) {
+		Objet temp = pirateObjet.get(p1);
+		pirateObjet.replace(p1, pirateObjet.get(p2));
+		pirateObjet.replace(p2, temp);
+		objetPirate.replace(pirateObjet.get(p1),p1);
+		objetPirate.replace(pirateObjet.get(p2),p2);
 	}
 	
 	

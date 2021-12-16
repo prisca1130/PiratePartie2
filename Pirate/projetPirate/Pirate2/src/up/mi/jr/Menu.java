@@ -43,15 +43,18 @@ public class Menu {
 					choix = lireEntierAuClavier(sc, "\nChoix = ");
 			switch (choix) {
 			case 1:
+				Cout cout1 = new Cout(rel);
+				System.out.println(affec.afficheAffectation());
 				System.out.println("Pour la résolution automatique, combien de tentative d'échange voulez vous faire?");
 				int k = lireEntierAuClavier(sc, "\nNombre tentative = ");
-				affec = cout.algoNaif(k);
+				affec = cout1.algoNaif(affec);
 				System.out.println("\n---------------- Résultat de la résolution automatique  -----------------");
 				System.out.println(affec.afficheAffectation());
-				System.out.println("\nle cout est : "+cout.calculCout(affec));
+				System.out.println("\nle cout est : "+cout1.calculCout(affec));
 				break;
 			case 2:
 				menu2(sc,rel,affec);
+				System.out.println(affec.afficheAffectation());
 				break;
 			case 3:
 				sauvegarder(affec,sc);
@@ -94,13 +97,18 @@ public class Menu {
 			String p1 = sc.next();
 			System.out.println("Entrez le nom du second pirate");
 			String p2 = sc.next();
-			if(!(rel.getListePirate().containsKey(p1) && rel.getListePirate().containsKey(p2))){
-				throw new EmptyObjectException("Les pirates saisis n'existent pas");
+			while(!(rel.getListePirate().containsKey(p1) && rel.getListePirate().containsKey(p2))){
+				System.out.println("Les pirates saisis n'existent pas");
+				System.out.println("Veuillez resaisir Les noms des pirates pour lesquels vous voulez faire l'echange d'objet ?");
+				System.out.println("Entrez le nom du premier pirate");
+				p1 = sc.next();
+				System.out.println("Entrez le nom du second pirate");
+				p2 = sc.next();
 			}
 			if(p1.equals(p2)) {
 				System.err.println("Vous voulez échanger les objets d'un même pirate");
 			}
-			aff = aff.echange(rel.getListePirate().get(p1), rel.getListePirate().get(p2));
+			aff.echangeNew(rel.getListePirate().get(p1), rel.getListePirate().get(p2));
 			System.out.println("\n---------------- Résultat de votre résolution -----------------");
 			System.out.println(aff.afficheAffectation());
 			break;
