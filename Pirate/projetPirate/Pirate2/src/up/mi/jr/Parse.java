@@ -18,7 +18,7 @@ public class Parse {
         this.nbligne=0;
     }
 
-    public void parserPirate()throws EmptyObjectException {
+    public void parserFichier()throws EmptyObjectException {
         String nom = null;
         String nomObjet = null;
         String nomsPirate = null;
@@ -145,6 +145,9 @@ public class Parse {
         if(nomsPirObj == null) {
             System.err.println("Veuillez revoir le fichier car la liste de preferences d'un pirate n'a pas ete indiqué");
             System.exit(0);
+        }
+        if (rel.getPreference().size() != rel.getListePirate().size()) {
+            throw new EmptyObjectException("Veuillez revoir le fichier au niveau de \"preference\" \n car il faut saisir autant de relation de préférence que de nombre de pirate");
         }
     }
 

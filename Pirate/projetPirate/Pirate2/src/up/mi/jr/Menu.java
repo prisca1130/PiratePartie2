@@ -14,16 +14,8 @@ public class Menu {
 			Affectation affec = new Affectation();
 			Cout cout = new Cout(rel);
 			File fichier = new File(args[0]);
-			//Recuperation recup = new Recuperation(fichier,rel);
 			Parse parse = new Parse(fichier,rel);
-			parse.parserPirate();
-			/*
-			recup.parserPirate();
-			recup.parserObjet();
-			recup.parserDeteste();
-			recup.parserPreference();
-			affec.affectation(rel);*/
-
+			parse.parserFichier();
 			System.out.println("\n---------------- Liste de l'équipage  -----------------");
 			System.out.println(rel.afficheListepirate());
 			System.out.println("\n---------------- Liste du butin  -----------------");
@@ -69,7 +61,9 @@ public class Menu {
 			}
 		}while(choix!=4);
 		sc.close();
-		}catch(EmptyObjectException e) {
+		} catch(ArrayIndexOutOfBoundsException e) {
+			System.err.println("Veuillez mettre en argument de la ligne de commande le chemin du fichier");
+		} catch(EmptyObjectException e) {
 			System.err.println(e.getMessage());
 		}
    }
