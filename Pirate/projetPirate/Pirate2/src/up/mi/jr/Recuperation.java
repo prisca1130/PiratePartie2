@@ -17,7 +17,7 @@ public class Recuperation {
 		this.rel=rel;
 	}
 
-	public void parserPirate() {
+	public void parserPirate()throws EmptyObjectException {
 		String nom = null;
 		try(BufferedReader br = new BufferedReader(new FileReader(fichier))){
 			String ligne = null;
@@ -26,12 +26,14 @@ public class Recuperation {
 				if(ligne.startsWith("pirate") || ligne.startsWith("Pirate")) {
 
 					nom = ligne.substring(ligne.indexOf("(")+1, ligne.indexOf(")"));
+					if(rel.getListePirate().containsKey(nom)){
+						throw new EmptyObjectException("Veuillez revoir le fichier au niveau de \"pirate\" \n, car vous avez saisie deux fois le nom d'un pirate");
+					}
 					rel.getListePirate().put(nom,new Pirate(nom));
 				}
 			}
 		}catch (FileNotFoundException e) {
-			e. printStackTrace ();
-			System.err.println(e.getMessage());
+			System.err.println("Veuillez revoir la saisie du chemin du fichier car le fichier est introuvable");
 		} catch (IOException e) {
 			e. printStackTrace ();
 			System.err.println(e.getMessage());
@@ -52,12 +54,14 @@ public class Recuperation {
 				if(ligne.startsWith("objet") || ligne.startsWith("Objet")) {
 
 					nomObjet = ligne.substring(ligne.indexOf("(")+1, ligne.indexOf(")"));
+					if(rel.getListeObj().containsKey(nomObjet)){
+						throw new EmptyObjectException("Veuillez revoir le fichier au niveau d' \"objet\" \n, car vous avez saisie deux fois le nom d'un objet");
+					}
 					rel.getListeObj().put(nomObjet,new Objet(nomObjet));
 				}
 			}
 		}catch (FileNotFoundException e) {
-			e. printStackTrace ();
-			System.err.println(e.getMessage());
+			System.err.println("Veuillez revoir la saisie du chemin du fichier car le fichier est introuvable");
 		} catch (IOException e) {
 			e. printStackTrace ();
 			System.err.println(e.getMessage());
@@ -108,8 +112,7 @@ public class Recuperation {
 				}
 			}
 		}catch (FileNotFoundException e) {
-			e. printStackTrace ();
-			System.err.println(e.getMessage());
+			System.err.println("Veuillez revoir la saisie du chemin du fichier car le fichier est introuvable");
 		} catch (IOException e) {
 			e. printStackTrace ();
 			System.err.println(e.getMessage());
@@ -137,7 +140,7 @@ public class Recuperation {
 					ArrayList<Objet> listObj = new ArrayList<>();
 					String [] EnsPirObj = nomsPirObj.split(",");
 					if (EnsPirObj.length != rel.getListePirate().size()+1 ) {
-						throw new EmptyObjectException("Veuillez revoir le fichier au niveau de \"preference\" \n car tous les objets doivent être ordonner dans la liste de préférence de chaque pirate");
+						throw new EmptyObjectException("Veuillez revoir le fichier au niveau de \"preference\" \n car vous avez oublié de saisir un objet dans la liste de préférence d'un pirate");
 					}
 
 					for(int i = 1; i<EnsPirObj.length; i++) {
@@ -153,8 +156,7 @@ public class Recuperation {
 				}
 			}
 		}catch (FileNotFoundException e) {
-			e. printStackTrace ();
-			System.err.println(e.getMessage());
+			System.err.println("Veuillez revoir la saisie du chemin du fichier car le fichier est introuvable");
 		} catch (IOException e) {
 			e. printStackTrace ();
 			System.err.println(e.getMessage());
