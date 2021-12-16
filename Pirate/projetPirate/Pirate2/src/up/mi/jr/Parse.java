@@ -24,13 +24,15 @@ public class Parse {
         String nomsPirate = null;
         String nomsPirObj = null;
         try(BufferedReader br = new BufferedReader(new FileReader(fichier))){
-            String ligne = null;
+            String ligne;
             String subligne= null;
             while ((ligne = br.readLine()) != null) {
                 nbligne++;
+                //Gestion des erreurs liées à la forme du fichier
                 if(ligne.isEmpty()){
                     throw new EmptyObjectException("la ligne "+ nbligne+" est vide");
                 }
+
                 if(!ligne.endsWith(".")){
                   throw new EmptyObjectException("Veuillez revoir le fichier car la ligne "+nbligne+" ne se termine pas par un point");
                 }
@@ -43,8 +45,10 @@ public class Parse {
                if( !(ligne.startsWith("pirate") || ligne.startsWith("objet") || ligne.startsWith("deteste") || ligne.startsWith("preference"))){
                    throw new EmptyObjectException("Veuillez revoir le fichier car la ligne "+nbligne+" commence par un mot inconnue");
                }
-                if (ligne.startsWith("pirate")) {
-                    nom = subligne;
+
+               //Partie pour récuperer les pirates
+               if (ligne.startsWith("pirate")) {
+                   nom = subligne;
                    if(nom.split(",").length != 1){
                        throw new EmptyObjectException("\"Veuillez revoir le fichier car à la ligne "+nbligne+" le pirate a plusieur noms");
                    }
@@ -54,7 +58,8 @@ public class Parse {
                    rel.getListePirate().put(nom, new Pirate(nom));
                 }
 
-                if (ligne.startsWith("objet")) {
+                //Partie pour récuperer les objets
+               if (ligne.startsWith("objet")) {
                     nomObjet = subligne;
                     if(nomObjet.split(",").length != 1){
                         throw new EmptyObjectException("\"Veuillez revoir le fichier car à la ligne "+nbligne+" l'objet a plusieur noms");
@@ -65,7 +70,8 @@ public class Parse {
                     rel.getListeObj().put(nomObjet, new Objet(nomObjet));
                 }
 
-                if (ligne.startsWith("deteste") ) {
+                //Partie pour récuperer les affinités entre les pirates
+               if (ligne.startsWith("deteste") ) {
                     nomsPirate = subligne;
                     if(nomsPirate.split(",").length != 2){
                         throw new EmptyObjectException("\"Veuillez revoir la ligne "+nbligne+" du fichier car deteste peut avoir que deux arguments");
@@ -94,7 +100,8 @@ public class Parse {
                     }
                 }
 
-                if(ligne.startsWith("preferences")) {
+                //Partie pour récuperer les preferences des pirates
+               if(ligne.startsWith("preferences")) {
                     nomsPirObj = subligne;
                     String [] EnsPirObj = nomsPirObj.split(",");
                     if(!rel.getListePirate().containsKey(EnsPirObj[0])){
@@ -103,7 +110,6 @@ public class Parse {
                     if (EnsPirObj.length != rel.getListePirate().size()+1 ) {
                         throw new EmptyObjectException("Veuillez revoir la ligne "+nbligne+ " du fichier car vous avez oublié de saisir un objet dans la liste de préférence d'un pirate");
                     }
-                    //A Traiter le cas où l'utilisateur oublie d'entrer le nom des 3 objets dans preference
                     ArrayList<Objet> listObj = new ArrayList<>();
                     for(int i = 1; i<EnsPirObj.length; i++) {
                         if(!rel.getListeObj().containsKey(EnsPirObj[i])){
