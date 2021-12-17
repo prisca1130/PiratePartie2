@@ -161,6 +161,7 @@ public class Menu {
 	 * Permet de sauvegarder dans un fichier (dont le chemin est donné par l'utilisateur) la dernière solution (la dernière affectation de la résolution manuelle ou automatique)
 	 * @param affec Objet de type affectation qui représente l'affectation des objets aux pirates
 	 * @param sc le scanner pour récupèrer le chemin du fichier dans lequel sera enregistré la dernière solution
+	 * @throws PirateException on relaie le traitement de l'exception au niveau de la méthode « appelante »
 	 */
 	private static void sauvegarder(Affectation affec, Scanner sc) throws PirateException {
 		System.out.println("Veuillez entrer le chemin du fichier dans lequel vous voulez enregistrer la dernière solution");

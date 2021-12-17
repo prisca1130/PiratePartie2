@@ -82,6 +82,7 @@ public class Affectation {
 	 * Permet d'attribuer un objet à chaque pirate
 	 * @param rel Objet de type Relation qui représente les differentes relations entre les pirates
 	 * et entre les pirates et les objets
+	 * @throws PirateException on relaie le traitement de l'exception au niveau de la méthode « appelante »
 	 */
 	public void affectation(Relation rel) throws  PirateException{
 		//Pour passer d'un dictionnaire associant à un objet, un pirate 
@@ -98,6 +99,7 @@ public class Affectation {
 	/**
 	 * Permet de retourner l'affichage d'un dictionnaire représentant l'attribution d'un objet à chaque pirate
 	 * @return L'affichage d'un dictionnaire qui associe à chaque pirate, l'objet qui lui est affecté
+	 * @throws PirateException on relaie le traitement de l'exception au niveau de la méthode « appelante »
 	 */
 	public String afficheAffectation() throws  PirateException{
 		if(pirateObjet.isEmpty()){

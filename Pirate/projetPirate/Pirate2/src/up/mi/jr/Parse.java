@@ -55,33 +55,40 @@ public class Parse {
                 nbligne++;
                 //Gestion des erreurs liées à la forme du fichier
                 if(ligne.isEmpty()){
+                    System.out.println(ligne);
                     throw new PirateException("la ligne "+ nbligne+" est vide");
                 }
 
                 if(!ligne.endsWith(".")){
+                    System.out.println(ligne);
                   throw new PirateException("Veuillez revoir le fichier car la ligne "+nbligne+" ne se termine pas par un point");
                 }
                try {
                 subligne = ligne.substring(ligne.indexOf("(") + 1, ligne.indexOf(")"));
                }catch (StringIndexOutOfBoundsException e){
+                   System.out.println(ligne);
                    System.err.println("Veuillez mettre les parenthèse correctement à la ligne "+nbligne);
                }
-
-               if(!ligne.split("\\)")[1].equals(".")){
-                   throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car il y a au moins un caractère incorrect entre la parenthèse fermante et le point");
+               if(!ligne.split("\\)")[1].equals(".") || ligne.split("\\)").length != 2){
+                   System.out.println(ligne);
+                   throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car il y a au moins un caractère incorrect autour du point");
                }
 
-               if( !(ligne.startsWith("pirate") || ligne.startsWith("objet") || ligne.startsWith("deteste") || ligne.startsWith("preference"))){
-                   throw new PirateException("Veuillez revoir le fichier car la ligne "+nbligne+" commence par un mot inconnu");
+               if( !(ligne.split("\\(")[0].equals("pirate") || ligne.split("\\(")[0].equals("objet") || ligne.split("\\(")[0].equals("deteste") || ligne.split("\\(")[0].equals("preferences"))
+               ){
+                   System.out.println(ligne);
+                   throw new PirateException("Veuillez revoir le fichier car la ligne "+nbligne+" commence par une syntaxe inconnue");
                }
 
                //Partie pour récuperer les pirates
                if (ligne.startsWith("pirate")) {
                    nom = subligne;
                    if(nom.split(",").length != 1){
+                       System.out.println(ligne);
                        throw new PirateException("\"Veuillez revoir le fichier car à la ligne "+nbligne+" le pirate a plusieurs noms");
                    }
                    if (rel.getListePirate().containsKey(nom)) {
+                       System.out.println(ligne);
                         throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car vous avez saisi deux fois le nom d'un pirate");
                    }
                    rel.getListePirate().put(nom, new Pirate(nom));
@@ -91,9 +98,11 @@ public class Parse {
                if (ligne.startsWith("objet")) {
                     nomObjet = subligne;
                     if(nomObjet.split(",").length != 1){
+                        System.out.println(ligne);
                         throw new PirateException("\"Veuillez revoir le fichier car à la ligne "+nbligne+" l'objet a plusieurs noms");
                     }
                     if (rel.getListeObj().containsKey(nomObjet)) {
+                        System.out.println(ligne);
                         throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car vous avez saisi deux fois le nom d'un objet");
                     }
                     rel.getListeObj().put(nomObjet, new Objet(nomObjet));
@@ -103,14 +112,17 @@ public class Parse {
                if (ligne.startsWith("deteste") ) {
                     nomsPirate = subligne;
                     if(nomsPirate.split(",").length != 2){
+                        System.out.println(ligne);
                         throw new PirateException("\"Veuillez revoir la ligne "+nbligne+" du fichier car deteste peut avoir que deux arguments");
                     }
                     ArrayList<Pirate> deteste1 = new ArrayList<>();
                     ArrayList<Pirate> deteste2 = new ArrayList<>();
                     if (!(rel.getListePirate().containsKey(nomsPirate.split(",")[0]) && rel.getListePirate().containsKey(nomsPirate.split(",")[1]))) {
+                        System.out.println(ligne);
                         throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car le nom du pirate n'existe pas");
                     }
                     if (nomsPirate.split(",")[0].equals(nomsPirate.split(",")[1])) {
+                        System.out.println(ligne);
                         throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car un pirate ne peut se détester lui-même");
                     }
                     Pirate p1 = rel.getListePirate().get(nomsPirate.split(",")[0]);
@@ -134,17 +146,21 @@ public class Parse {
                     nomsPirObj = subligne;
                     String [] EnsPirObj = nomsPirObj.split(",");
                     if(!rel.getListePirate().containsKey(EnsPirObj[0])){
+                        System.out.println(ligne);
                         throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier  car le premier argument de preference doit être un nom de pirate existant");
                     }
                     if (EnsPirObj.length != rel.getListePirate().size()+1 ) {
+                        System.out.println(ligne);
                         throw new PirateException("Veuillez revoir la ligne "+nbligne+ " du fichier car vous avez oublié de saisir un objet dans la liste de préférence d'un pirate");
                     }
                     ArrayList<Objet> listObj = new ArrayList<>();
                     for(int i = 1; i<EnsPirObj.length; i++) {
                         if(!rel.getListeObj().containsKey(EnsPirObj[i])){
+                            System.out.println(ligne);
                             throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car un nom d'objet n'existe pas dans la liste de preference");
                         }
                         if(listObj.contains(rel.getListeObj().get(EnsPirObj[i]))){
+                            System.out.println(ligne);
                             throw new PirateException("Veuillez revoir la ligne "+nbligne+ " du fichier car vous avez saisi deux fois le même objet dans la liste de preference");
                         }else {
                             listObj.add(rel.getListeObj().get(EnsPirObj[i]));
