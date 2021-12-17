@@ -11,8 +11,7 @@ import java.util.Random;
  */
 public class Cout {
 	/**
-	 * Objet de type Relation qui représente les differentes relations entre les pirates
-	 * et entre les pirates et les objets
+	 * Objet de type Relation qui représente les differentes relations entre les pirates et les objets
 	 */
 	private Relation rel;
 	/**
@@ -22,8 +21,7 @@ public class Cout {
 
 	/**
 	 * Constructeur qui initialise le coût à partir d'un objet de type Relation
-	 * @param relation Objet de type Relation qui représente les differentes relations entre les pirates
-	 * et entre les pirates et les objets
+	 * @param relation Objet de type Relation qui représente les differentes relations entre les pirates et les objets
 	 */
 	public Cout(Relation relation) {
 		rel=relation;
@@ -67,7 +65,6 @@ public class Cout {
 		int i = 0;
 		Random randomGenerateur = new Random();
 		Affectation S = aff;
-		//S.affectation(rel);
 		while (i < k) {
 			ArrayList <Pirate> equipage = new ArrayList<>(rel.getListePirate().values());
 			ArrayList <Pirate> equipe = new ArrayList<>(rel.getListePirate().values());

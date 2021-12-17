@@ -11,7 +11,10 @@ import java.util.Scanner;
  *
  */
 public class Menu {
-
+	/**
+	 * Méthode principale pour lancer le programme
+	 * @param args Le premier argument correspond au chemin du fichier de l'utilisateur saisi en ligne de commande
+	 */
 	public static void main(String [] args) {
 		try {
 			System.out.println("Bonjour!!");
@@ -80,8 +83,7 @@ public class Menu {
 	/**
 	 * Permet de créer le menu2 pour effectuer la résolution en échangeant les objets entre deux pirates et afficher le coût des affectations d'objets des pirates
 	 * @param sc Le Scanner pour récuperer le choix de l'utilisateur pour le menu 2
-	 * @param rel Un objet de type Relation pour représenter les differentes relations entre les pirates
-	 * et les pirates et les objets
+	 * @param rel Un objet de type Relation pour représenter les differentes relations entre les pirates et les objets
 	 * @param aff Objet de type affectation qui représente les affectations des objets aux pirates
 	 * @throws PirateException on relaie le traitement de l'exception au niveau de la méthode « appelante »
 	 */
@@ -138,7 +140,7 @@ public class Menu {
 	 * Lit un entier au clavier
 	 * 
 	 * @param sc      le scanner dans lequel lire l'entier
-	 * @param message le message a afficher avant la lecture
+	 * @param message le message à afficher avant la lecture
 	 * @return l'entier lu
 	 */
 	private static int lireEntierAuClavier(Scanner sc, String message) {

@@ -19,7 +19,7 @@ public class Parse {
     private File fichier;
 
     /**
-     * Objet de type Relation représentant les différentes relation entre pirates et entre pirates et objets
+     * Objet de type Relation représentant les différentes relations entre les pirates et les objets
      */
     private Relation rel;
 
@@ -53,6 +53,7 @@ public class Parse {
             String subligne= null;
             while ((ligne = br.readLine()) != null) {
                 nbligne++;
+
                 //Gestion des erreurs liées à la forme du fichier
                 if(ligne.isEmpty()){
                     System.out.println(ligne);

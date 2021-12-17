@@ -43,7 +43,7 @@ public class Affectation {
 	}
 	
 	/**
-	 * Permet de retourner le dictionnaire des affectaions du butin
+	 * Permet de retourner le dictionnaire qui associe à un pirate, l'objet qui lui est affecté
 	 * @return le dictionnaire qui associe à un pirate, l'objet qui lui est affecté 
 	 */
 	public HashMap<Pirate,Objet> getPirateObjet(){
@@ -52,7 +52,7 @@ public class Affectation {
 
 
 	/**
-	 * Permet de retourner le dictionnaire des affectaions du butin
+	 * Permet de retourner qui associe à un objet, le pirate qui détient cet objet
 	 * @return un dictionnaire qui associe à un objet, le pirate qui détient cet objet
 	 */
 	public HashMap<Objet,Pirate> getObjetPirate(){
@@ -61,8 +61,7 @@ public class Affectation {
 
 	/**
 	 * Permet d'attribuer à un objet, le pirate qui détient cet objet
-	 * @param rel Objet de type Relation qui représente les differentes relations entre les pirates
-	 * et entre les pirates et les objets
+	 * @param rel Objet de type Relation qui représente les differentes relations entre les pirates et les objets
 	 */
 	private void tempAffectation(Relation rel) {
 		for(Pirate p : rel.getPreference().keySet()) {
@@ -80,8 +79,7 @@ public class Affectation {
 
 	/**
 	 * Permet d'attribuer un objet à chaque pirate
-	 * @param rel Objet de type Relation qui représente les differentes relations entre les pirates
-	 * et entre les pirates et les objets
+	 * @param rel Objet de type Relation qui représente les differentes relations entre les pirates et les objets
 	 * @throws PirateException on relaie le traitement de l'exception au niveau de la méthode « appelante »
 	 */
 	public void affectation(Relation rel) throws  PirateException{
@@ -89,7 +87,7 @@ public class Affectation {
 		//à un dictionnaire associant à un pirate, un objet
 		tempAffectation(rel);
 		if(objetPirate.isEmpty()){
-			throw new PirateException("L'affectation n'a pas encore  été fait");
+			throw new PirateException("L'affectation n'a pas encore  été faite");
 		}
 		for(Objet i : objetPirate.keySet()) {
 			this.pirateObjet.put(objetPirate.get(i), i);
