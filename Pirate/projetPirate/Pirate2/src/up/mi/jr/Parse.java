@@ -133,6 +133,7 @@ public class Parse {
             e. printStackTrace ();
             System.err.println(e.getMessage());
         }
+
         if(nom == null) {
             System.err.println("Veuillez revoir le fichier car le nom du pirate n'a pas ete indiqué");
             System.exit(0);

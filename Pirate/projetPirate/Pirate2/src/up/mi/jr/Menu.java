@@ -25,6 +25,7 @@ public class Menu {
 			System.out.println("\n---------------- Liste de préférence des pirates  -----------------");
 			System.out.println(rel.affichePreference());
 			System.out.println("\n---------------- Liste de la première affectation  -----------------");
+			affec.affectation(rel);
 			System.out.println(affec.afficheAffectation());
 			System.out.println("\nle cout est : "+cout.calculCout(affec));
 
@@ -48,6 +49,7 @@ public class Menu {
 				break;
 			case 2:
 				menu2(sc,rel,affec);
+				System.out.println("\n---------------- Résultat de la dernière résolution -----------------");
 				System.out.println(affec.afficheAffectation());
 				break;
 			case 3:

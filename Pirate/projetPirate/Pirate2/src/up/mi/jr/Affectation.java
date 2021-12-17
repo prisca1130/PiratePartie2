@@ -60,9 +60,11 @@ public class Affectation {
 			// l désigne la liste des objets déjà affecté
 			ArrayList<Objet> l= new ArrayList<>(objetPirate.keySet());
 			// On parcourt la liste de préférence d'un pirate jusqu'à trouver un objet qui n'est pas encore attribué à quelqu'un
+
 			while( l.contains(rel.getPreference().get(p).get(i)) && i<rel.getPreference().size()-1 ){
 				i++;
 			}
+
 			objetPirate.put(rel.getPreference().get(p).get(i), p);				
 	     }
 	}
