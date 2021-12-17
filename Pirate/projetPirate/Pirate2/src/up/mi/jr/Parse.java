@@ -72,17 +72,17 @@ public class Parse {
                }
 
                if( !(ligne.startsWith("pirate") || ligne.startsWith("objet") || ligne.startsWith("deteste") || ligne.startsWith("preference"))){
-                   throw new PirateException("Veuillez revoir le fichier car la ligne "+nbligne+" commence par un mot inconnue");
+                   throw new PirateException("Veuillez revoir le fichier car la ligne "+nbligne+" commence par un mot inconnu");
                }
 
                //Partie pour récuperer les pirates
                if (ligne.startsWith("pirate")) {
                    nom = subligne;
                    if(nom.split(",").length != 1){
-                       throw new PirateException("\"Veuillez revoir le fichier car à la ligne "+nbligne+" le pirate a plusieur noms");
+                       throw new PirateException("\"Veuillez revoir le fichier car à la ligne "+nbligne+" le pirate a plusieurs noms");
                    }
                    if (rel.getListePirate().containsKey(nom)) {
-                        throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car vous avez saisie deux fois le nom d'un pirate");
+                        throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car vous avez saisi deux fois le nom d'un pirate");
                    }
                    rel.getListePirate().put(nom, new Pirate(nom));
                 }
@@ -91,10 +91,10 @@ public class Parse {
                if (ligne.startsWith("objet")) {
                     nomObjet = subligne;
                     if(nomObjet.split(",").length != 1){
-                        throw new PirateException("\"Veuillez revoir le fichier car à la ligne "+nbligne+" l'objet a plusieur noms");
+                        throw new PirateException("\"Veuillez revoir le fichier car à la ligne "+nbligne+" l'objet a plusieurs noms");
                     }
                     if (rel.getListeObj().containsKey(nomObjet)) {
-                        throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car vous avez saisie deux fois le nom d'un objet");
+                        throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car vous avez saisi deux fois le nom d'un objet");
                     }
                     rel.getListeObj().put(nomObjet, new Objet(nomObjet));
                 }

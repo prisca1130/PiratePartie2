@@ -90,7 +90,6 @@ public class Relation {
 	 * @throws PirateException on relaie le traitement de l'exception au niveau de la méthode « appelante »
 	 */
 	public String affichePreference() throws PirateException {
-		//TODO gérer liste vide pour afficher??
 		if (preference.isEmpty()) {
 			throw new PirateException("La liste de préference de tous les pirates n'a pas été fait");
 		}

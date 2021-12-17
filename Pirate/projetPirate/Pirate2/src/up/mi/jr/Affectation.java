@@ -64,7 +64,7 @@ public class Affectation {
 	 * @param rel Objet de type Relation qui représente les differentes relations entre les pirates
 	 * et entre les pirates et les objets
 	 */
-	private void tempAffectation(Relation rel){
+	private void tempAffectation(Relation rel) {
 		for(Pirate p : rel.getPreference().keySet()) {
 			int i=0;
 			// l désigne la liste des objets déjà affecté
@@ -74,8 +74,7 @@ public class Affectation {
 			while( l.contains(rel.getPreference().get(p).get(i)) && i<rel.getPreference().size()-1 ){
 				i++;
 			}
-
-			objetPirate.put(rel.getPreference().get(p).get(i), p);				
+			objetPirate.put(rel.getPreference().get(p).get(i), p);
 	     }
 	}
 
@@ -84,10 +83,13 @@ public class Affectation {
 	 * @param rel Objet de type Relation qui représente les differentes relations entre les pirates
 	 * et entre les pirates et les objets
 	 */
-	public void affectation(Relation rel){
+	public void affectation(Relation rel) throws  PirateException{
 		//Pour passer d'un dictionnaire associant à un objet, un pirate 
 		//à un dictionnaire associant à un pirate, un objet
 		tempAffectation(rel);
+		if(objetPirate.isEmpty()){
+			throw new PirateException("L'affectation n'a pas encore  été fait");
+		}
 		for(Objet i : objetPirate.keySet()) {
 			this.pirateObjet.put(objetPirate.get(i), i);
 		}
@@ -97,7 +99,10 @@ public class Affectation {
 	 * Permet de retourner l'affichage d'un dictionnaire représentant l'attribution d'un objet à chaque pirate
 	 * @return L'affichage d'un dictionnaire qui associe à chaque pirate, l'objet qui lui est affecté
 	 */
-	public String afficheAffectation() {
+	public String afficheAffectation() throws  PirateException{
+		if(pirateObjet.isEmpty()){
+			throw new PirateException("l'affectation n'a pas encore été faite");
+		}
 		StringBuilder buf = new StringBuilder();
 		for(Pirate i : pirateObjet.keySet()) {
 			buf.append(i.getNom()).append(" : ").append(pirateObjet.get(i).toString()).append("\n");

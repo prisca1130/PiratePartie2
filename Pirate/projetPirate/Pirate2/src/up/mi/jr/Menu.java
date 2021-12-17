@@ -162,7 +162,7 @@ public class Menu {
 	 * @param affec Objet de type affectation qui représente l'affectation des objets aux pirates
 	 * @param sc le scanner pour récupèrer le chemin du fichier dans lequel sera enregistré la dernière solution
 	 */
-	private static void sauvegarder(Affectation affec, Scanner sc) {
+	private static void sauvegarder(Affectation affec, Scanner sc) throws PirateException {
 		System.out.println("Veuillez entrer le chemin du fichier dans lequel vous voulez enregistrer la dernière solution");
 		String chemin = sc.next();
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(chemin))){

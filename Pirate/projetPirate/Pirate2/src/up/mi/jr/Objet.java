@@ -35,29 +35,16 @@ public class Objet {
 		return "l'objet : "+ this.getNom();
 	}
 
-	//TODO choisir le equals
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		return result;
-	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(Object o) {
+		if((o == null) || !(o instanceof Objet)) {
+			return false;
+		}
+		if (o == this) {
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Objet other = (Objet) obj;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		return true;
+		}
+		Objet nvObjet = (Objet) o;
+		return (nvObjet.getNom()==(this.nom));
 	}
 }
