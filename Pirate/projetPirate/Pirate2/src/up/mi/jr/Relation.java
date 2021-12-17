@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-/** 
+/**
  * Représente les differentes relations entre les pirates et les objets, 
- * avec son dictionnaire deteste, son dictionnaire preference, son dictionnaire affectation et son dictionnaire tempAffec 
- *  
+ * avec son dictionnaire deteste, son dictionnaire preference, son dictionnaire listePirate et son dictionnaire listeObj
+ *
  * @author Abisha Jeyavel, Lalariniaina Ramanantoanina
- * @version 2.0
+ * @version 1.1
  */
 
 
@@ -83,14 +83,16 @@ public class Relation {
 		return listeObj;
 	}
 
-	
+
 	/**
 	 * Permet de retourner l'affichage d'un dictionnaire représentant les préférences de chaque pirate
 	 * @return La liste des objets rangés dans l'ordre de préférence de chaque pirate
+	 * @throws PirateException on relaie le traitement de l'exception au niveau de la méthode « appelante »
 	 */
-	public String affichePreference() throws EmptyObjectException {
+	public String affichePreference() throws PirateException {
+		//TODO gérer liste vide pour afficher??
 		if (preference.isEmpty()) {
-			throw new EmptyObjectException("La liste de préference de tous les pirates n'a pas été fait");
+			throw new PirateException("La liste de préference de tous les pirates n'a pas été fait");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(Pirate i : preference.keySet()) {
@@ -98,28 +100,32 @@ public class Relation {
 		}
 		return buf.toString();
 	}
-	
-	
+
+
 	/**
 	 * Permet de retourner l'affichage d'un dictionnaire qui associe à un pirate, les pirates qu'il n'aime pas
 	 * @return La liste des noms des pirates que chaque pirate n'aime pas
+	 * @throws PirateException on relaie le traitement de l'exception au niveau de la méthode « appelante »
 	 */
-	public String afficheDeteste() throws EmptyObjectException {
+	public String afficheDeteste() throws PirateException {
 		if (deteste.isEmpty()) {
-			throw new EmptyObjectException("Les relations d'affinité de tous les pirates n'ont pas été fait");
+			throw new PirateException("Les relations d'affinité de tous les pirates n'ont pas été fait");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(Pirate i : deteste.keySet()) {
 			buf.append("\n").append(i).append(" n'aime pas ").append(deteste.get(i));
 		}
 		return buf.toString();
-	}	
-	
-	
-	
-	public String afficheListepirate() throws EmptyObjectException {
+	}
+
+	/**
+	 * Permet de retourner l'affichage de la liste des noms de pirates
+	 * @return la liste des noms de pirates
+	 * @throws PirateException on relaie le traitement de l'exception au niveau de la méthode « appelante »
+	 */
+	public String afficheListepirate() throws PirateException {
 		if (listePirate.isEmpty()) {
-			throw new EmptyObjectException("La liste des pirates est vide");
+			throw new PirateException("La liste des pirates est vide");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(String i : listePirate.keySet()) {
@@ -127,11 +133,15 @@ public class Relation {
 		}
 		return buf.toString();
 	}
-	
-	
-	public String afficheListeObj() throws EmptyObjectException {
+
+	/**
+	 * Permet de retourner l'affichage de la liste des noms des objets
+	 * @return la liste des noms des objets
+	 * @throws PirateException on relaie le traitement de l'exception au niveau de la méthode « appelante »
+	 */
+	public String afficheListeObj() throws PirateException {
 		if (listeObj.isEmpty()) {
-			throw new EmptyObjectException("La liste des objets est vide");
+			throw new PirateException("La liste des objets est vide");
 		}
 		StringBuilder buf = new StringBuilder();
 		for(String i : listeObj.keySet()) {

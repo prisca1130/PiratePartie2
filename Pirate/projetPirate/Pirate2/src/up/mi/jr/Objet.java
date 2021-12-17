@@ -3,10 +3,10 @@ package up.mi.jr;
 //partie 2
 
 /**
-* Représente un objet avec son nom (qui est un entier)
+* Représente un objet avec son nom
 * 
 * @author Abisha Jeyavel, Lalariniaina Ramanantoanina
-* @version 2.1
+* @version 1.1
 */
 public class Objet {
 	/**
@@ -35,6 +35,7 @@ public class Objet {
 		return "l'objet : "+ this.getNom();
 	}
 
+	//TODO choisir le equals
 	@Override
 	public int hashCode() {
 		final int prime = 31;

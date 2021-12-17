@@ -3,7 +3,13 @@ package up.mi.jr;
 import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+/**
+ * Représente les deux menus du partage de butin,
+ * et le main
+ * @author Abisha Jeyavel, Lalariniaina Ramanantoanina
+ * @version 1.1
+ *
+ */
 public class Menu {
 
 	public static void main(String [] args) {
@@ -16,6 +22,7 @@ public class Menu {
 			File fichier = new File(args[0]);
 			Parse parse = new Parse(fichier,rel);
 			parse.parserFichier();
+
 			System.out.println("\n---------------- Liste de l'équipage  -----------------");
 			System.out.println(rel.afficheListepirate());
 			System.out.println("\n---------------- Liste du butin  -----------------");
@@ -65,18 +72,21 @@ public class Menu {
 		sc.close();
 		} catch(ArrayIndexOutOfBoundsException e) {
 			System.err.println("Veuillez mettre en argument de la ligne de commande le chemin du fichier");
-		} catch(EmptyObjectException e) {
+		} catch(PirateException e) {
 			System.err.println(e.getMessage());
 		}
    }
-	
+
 	/**
-	 * Permet de créer le menu2 pour échanger les objets entre deux pirates et afficher le coût des affectations d'objets des pirates
+	 * Permet de créer le menu2 pour effectuer la résolution en échangeant les objets entre deux pirates et afficher le coût des affectations d'objets des pirates
 	 * @param sc Le Scanner pour récuperer le choix de l'utilisateur pour le menu 2
-	 * @param rel Un objet de type Relation pour représenter les differentes relations entre les pirates et les objets
+	 * @param rel Un objet de type Relation pour représenter les differentes relations entre les pirates
+	 * et les pirates et les objets
+	 * @param aff Objet de type affectation qui représente les affectations des objets aux pirates
+	 * @throws PirateException on relaie le traitement de l'exception au niveau de la méthode « appelante »
 	 */
 	
-	public static void menu2(Scanner sc,Relation rel, Affectation aff) throws EmptyObjectException {
+	public static void menu2(Scanner sc,Relation rel, Affectation aff) throws PirateException {
 		System.out.println("\n---------------- Résultat de la dernière résolution -----------------");
 		System.out.println(aff.afficheAffectation());
 		int choix;
@@ -147,15 +157,21 @@ public class Menu {
 		return nb;
 	}
 
+	/**
+	 * Permet de sauvegarder dans un fichier (dont le chemin est donné par l'utilisateur) la dernière solution (la dernière affectation de la résolution manuelle ou automatique)
+	 * @param affec Objet de type affectation qui représente l'affectation des objets aux pirates
+	 * @param sc le scanner pour récupèrer le chemin du fichier dans lequel sera enregistré la dernière solution
+	 */
 	private static void sauvegarder(Affectation affec, Scanner sc) {
 		System.out.println("Veuillez entrer le chemin du fichier dans lequel vous voulez enregistrer la dernière solution");
 		String chemin = sc.next();
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(chemin))){
 			bw.append(affec.afficheAffectation());
+			System.out.println("La sauvegarde s'est déroulé avec succès");
 		} catch (FileNotFoundException e) {
 			System.err.println("Le fichier de sauvegarde est introuvable");
 		}catch (IOException e) {
-			System.err.println(e.getMessage());
+			System.err.println("le sauvegarde a échoué");
 		}
 
 	}

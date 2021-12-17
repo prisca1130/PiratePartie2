@@ -30,6 +30,8 @@ public class Pirate {
 		return nom;
 	}
 
+	//TODO choisir le equals
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
