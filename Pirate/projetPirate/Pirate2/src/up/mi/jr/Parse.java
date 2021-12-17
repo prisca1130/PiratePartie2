@@ -67,6 +67,10 @@ public class Parse {
                    System.err.println("Veuillez mettre les parenthèse correctement à la ligne "+nbligne);
                }
 
+               if(!ligne.split("\\)")[1].equals(".")){
+                   throw new PirateException("Veuillez revoir la ligne "+nbligne+" du fichier car il y a au moins un caractère incorrect entre la parenthèse fermante et le point");
+               }
+
                if( !(ligne.startsWith("pirate") || ligne.startsWith("objet") || ligne.startsWith("deteste") || ligne.startsWith("preference"))){
                    throw new PirateException("Veuillez revoir le fichier car la ligne "+nbligne+" commence par un mot inconnue");
                }

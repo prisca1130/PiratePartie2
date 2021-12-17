@@ -50,10 +50,10 @@ public class Affectation {
 		return pirateObjet;
 	}
 
-	//TODO revoir la formulation il y a pas cde diff entre les deux et se
+
 	/**
 	 * Permet de retourner le dictionnaire des affectaions du butin
-	 * @return le dictionnaire qui associe à un pirate, l'objet qui lui est affecté 
+	 * @return un dictionnaire qui associe à un objet, le pirate qui détient cet objet
 	 */
 	public HashMap<Objet,Pirate> getObjetPirate(){
 		return objetPirate;
